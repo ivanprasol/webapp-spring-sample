@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>Test Flux Application</title>
+
+  <link rel="icon" type="image/ico" href="/resources/images/favicon.ico">
+</head>
+<body>
+  <h1>Test web app</h1>
+  <h3 th:text="#{technology}"></h3>
+  <h3 th:text="${appLanguage}"></h3>
+  <h3>Locale: <span th:text="${locale}"></span></h3>
+  <p>
+    <a href="data/test.json">Show JSON data.</a>
+  </p>
+
+</body>
+</html>
