@@ -22,8 +22,6 @@ public class InitializerWebApp extends AbstractAnnotationConfigDispatcherServlet
     protected Filter[] getServletFilters() {
         return new Filter[] {
                 new ResourceUrlEncodingFilter()
-//            new HiddenHttpMethodFilter(),
-//            new CharacterEncodingFilter()
         };
     }
 }
