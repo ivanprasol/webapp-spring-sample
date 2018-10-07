@@ -12,8 +12,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
   <h1>Test web app</h1>
-  <h3><s:message code="technology"/></h3>
-  <h3>${appLanguage}</h3>
+  <h3><s:message code="technology"/>: ${appLanguage}</h3>
   <h3>Locale: ${locale}</h3>
   <p>
     <a href="data/test.json">Show JSON data.</a>
