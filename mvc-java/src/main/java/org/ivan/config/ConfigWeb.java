@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class ConfigWeb implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        var cacheResources = !this.env.acceptsProfiles("dev");
+        var cacheResources = !this.env.acceptsProfiles(Profiles.of("dev"));
         var cachePeriod = 31556926;
         var versionResourceResolver = new VersionResourceResolver().addContentVersionStrategy("/**");
 
