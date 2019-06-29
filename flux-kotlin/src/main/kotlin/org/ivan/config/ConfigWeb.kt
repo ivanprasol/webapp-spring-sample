@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.env.Environment
+import org.springframework.core.env.Profiles
 import org.springframework.http.codec.ServerCodecConfigurer
 import org.springframework.http.codec.json.Jackson2JsonDecoder
 import org.springframework.http.codec.json.Jackson2JsonEncoder
@@ -32,7 +33,7 @@ open class ConfigWeb : WebFluxConfigurer {
     lateinit var env : Environment
 
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-        val cacheResourses = !this.env.acceptsProfiles("dev");
+        val cacheResourses = !this.env.acceptsProfiles(Profiles.of("dev"));
         val versionResourceResolver = VersionResourceResolver().addContentVersionStrategy("/**");
 
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/")
