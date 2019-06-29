@@ -8,7 +8,6 @@ module org.ivan.flux.java {
     requires com.fasterxml.jackson.annotation;
     requires org.apache.logging.log4j;
     requires reactor.core;
-    requires javax.servlet.api;
     requires thymeleaf;
     requires thymeleaf.spring5;
 }
