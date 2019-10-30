@@ -11,7 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.stereotype.Controller;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages="org.ivan",
         excludeFilters = {
                 @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION),

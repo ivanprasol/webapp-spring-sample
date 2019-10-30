@@ -11,7 +11,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
 import org.springframework.stereotype.Controller
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ComponentScan(basePackages= ["org.ivan"],
         excludeFilters = [
             ComponentScan.Filter(value = [Controller::class], type = FilterType.ANNOTATION),
@@ -26,11 +26,11 @@ open class ConfigApp {
 
     @Bean
     open fun messageSource() : MessageSource {
-        val bundle = ReloadableResourceBundleMessageSource();
-        bundle.setBasenames("i18n/messages");
-        bundle.setDefaultEncoding("UTF-8");
-        bundle.setFallbackToSystemLocale(false);
-        bundle.setUseCodeAsDefaultMessage(true);
-        return bundle;
+        val bundle = ReloadableResourceBundleMessageSource()
+        bundle.setBasenames("i18n/messages")
+        bundle.setDefaultEncoding("UTF-8")
+        bundle.setFallbackToSystemLocale(false)
+        bundle.setUseCodeAsDefaultMessage(true)
+        return bundle
     }
 }

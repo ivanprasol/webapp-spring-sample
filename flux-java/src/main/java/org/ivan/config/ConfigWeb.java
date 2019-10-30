@@ -2,13 +2,13 @@ package org.ivan.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
@@ -28,12 +28,15 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebFlux
 @ComponentScan(basePackages="org.ivan")
 public class ConfigWeb implements WebFluxConfigurer {
-    @Autowired
-    private Environment env;
+    private final Environment env;
+
+    public ConfigWeb(Environment env) {
+        this.env = env;
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        var cacheResourses = !this.env.acceptsProfiles("dev");
+        var cacheResourses = !this.env.acceptsProfiles(Profiles.of("dev"));
         var versionResourceResolver = new VersionResourceResolver().addContentVersionStrategy("/**");
 
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/")

@@ -1,7 +1,6 @@
 package org.ivan.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -19,15 +18,18 @@ import org.springframework.web.servlet.resource.VersionResourceResolver;
 
 import java.util.List;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebMvc
 @ComponentScan(basePackages="org.ivan.controllers", useDefaultFilters=false,
         includeFilters = @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION))
 public class ConfigWeb implements WebMvcConfigurer {
-    @Autowired
-    private Environment env;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final Environment env;
+    private final ObjectMapper objectMapper;
+
+    public ConfigWeb(Environment env, ObjectMapper objectMapper) {
+        this.env = env;
+        this.objectMapper = objectMapper;
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

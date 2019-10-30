@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = "data", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DataController {
     private Logger log = LogManager.getLogger();
 

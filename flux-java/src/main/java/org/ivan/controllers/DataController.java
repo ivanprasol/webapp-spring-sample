@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(path = "data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = "data", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DataController {
     private Logger log = LogManager.getLogger();
 
@@ -20,7 +20,7 @@ public class DataController {
         return Mono.just(new ResultObject().setId(1L).setName("data"));
     }
 
-    private class ResultObject {
+    private static class ResultObject {
         private long id;
         private String name;
 

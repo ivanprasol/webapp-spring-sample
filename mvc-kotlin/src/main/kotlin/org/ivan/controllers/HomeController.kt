@@ -12,12 +12,12 @@ class HomeController {
 
     @GetMapping("/")
     fun displayUi(locale: Locale) : ModelAndView {
-        log.info("Starting the UI...");
+        log.info("Starting the UI...")
 
-        val mv = ModelAndView("ui");
-        mv.addObject("appLanguage", "Kotlin");
-        mv.addObject("locale", locale);
+        val mv = ModelAndView("ui")
+        mv.addObject("appLanguage", "Kotlin")
+        mv.addObject("locale", locale)
 
-        return mv;
+        return mv
     }
 }

@@ -12,11 +12,11 @@ open class HomeController {
 
     @GetMapping
     open fun displayUi(locale: Locale, model: Model) : String {
-        log.info("Starting the UI (locale={})...", locale);
+        log.info("Starting the UI (locale={})...", locale)
 
-        model.addAttribute("appLanguage", "Kotlin");
-        model.addAttribute("locale", locale);
+        model.addAttribute("appLanguage", "Kotlin")
+        model.addAttribute("locale", locale)
 
-        return "ui";
+        return "ui"
     }
 }

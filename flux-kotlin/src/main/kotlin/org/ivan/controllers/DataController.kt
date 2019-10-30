@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 import reactor.core.publisher.Mono
 
 @RestController
-@RequestMapping(path = ["data"], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])
+@RequestMapping(path = ["data"], produces = [MediaType.APPLICATION_JSON_VALUE])
 open class DataController {
     private val log = LogManager.getLogger()
 

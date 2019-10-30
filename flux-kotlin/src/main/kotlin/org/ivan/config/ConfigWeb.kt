@@ -2,7 +2,6 @@ package org.ivan.config
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.MessageSource
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -28,22 +27,19 @@ import org.thymeleaf.templatemode.TemplateMode
 @Configuration
 @EnableWebFlux
 @ComponentScan(basePackages=["org.ivan"])
-open class ConfigWeb : WebFluxConfigurer {
-    @Autowired
-    lateinit var env : Environment
-
+open class ConfigWeb(private val env: Environment) : WebFluxConfigurer {
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-        val cacheResourses = !this.env.acceptsProfiles(Profiles.of("dev"));
-        val versionResourceResolver = VersionResourceResolver().addContentVersionStrategy("/**");
+        val cacheResourses = !this.env.acceptsProfiles(Profiles.of("dev"))
+        val versionResourceResolver = VersionResourceResolver().addContentVersionStrategy("/**")
 
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/")
                 .resourceChain(cacheResourses)
                 .addResolver(versionResourceResolver)
-                .addTransformer(CssLinkResourceTransformer());
+                .addTransformer(CssLinkResourceTransformer())
 
         registry.addResourceHandler("/*.js").addResourceLocations("/")
                 .resourceChain(cacheResourses)
-                .addResolver(versionResourceResolver);
+                .addResolver(versionResourceResolver)
     }
 
     override fun configureViewResolvers(registry: ViewResolverRegistry) {
@@ -53,19 +49,19 @@ open class ConfigWeb : WebFluxConfigurer {
     override fun configureHttpMessageCodecs(configurer: ServerCodecConfigurer) {
         val objectMapper = this.objectMapper()
 
-        configurer.defaultCodecs().jackson2JsonEncoder(Jackson2JsonEncoder(objectMapper));
-        configurer.defaultCodecs().jackson2JsonDecoder(Jackson2JsonDecoder(objectMapper));
+        configurer.defaultCodecs().jackson2JsonEncoder(Jackson2JsonEncoder(objectMapper))
+        configurer.defaultCodecs().jackson2JsonDecoder(Jackson2JsonDecoder(objectMapper))
     }
 
     @Bean
     open fun templateResolver() : SpringResourceTemplateResolver {
-        val templateResolver = SpringResourceTemplateResolver();
-        templateResolver.prefix = "/templates/";
-        templateResolver.suffix = ".html";
-        templateResolver.templateMode = TemplateMode.HTML;
-        templateResolver.isCacheable = true;
+        val templateResolver = SpringResourceTemplateResolver()
+        templateResolver.prefix = "/templates/"
+        templateResolver.suffix = ".html"
+        templateResolver.templateMode = TemplateMode.HTML
+        templateResolver.isCacheable = true
 
-        return templateResolver;
+        return templateResolver
 
     }
 
@@ -80,9 +76,9 @@ open class ConfigWeb : WebFluxConfigurer {
     @Bean
     open fun viewResolver() : ThymeleafReactiveViewResolver {
         val viewResolver = ThymeleafReactiveViewResolver()
-        viewResolver.templateEngine = this.templateEngine();
+        viewResolver.templateEngine = this.templateEngine()
 //        viewResolver.setViewNames(new String[] {".html"});
-        return viewResolver;
+        return viewResolver
     }
 
     @Bean
@@ -93,11 +89,11 @@ open class ConfigWeb : WebFluxConfigurer {
 
     @Bean
     open fun messageSource() : MessageSource {
-        val bundle = ReloadableResourceBundleMessageSource();
-        bundle.setBasenames("i18n/messages");
-        bundle.setDefaultEncoding("UTF-8");
-        bundle.setFallbackToSystemLocale(false);
-        bundle.setUseCodeAsDefaultMessage(true);
-        return bundle;
+        val bundle = ReloadableResourceBundleMessageSource()
+        bundle.setBasenames("i18n/messages")
+        bundle.setDefaultEncoding("UTF-8")
+        bundle.setFallbackToSystemLocale(false)
+        bundle.setUseCodeAsDefaultMessage(true)
+        return bundle
     }
 }
